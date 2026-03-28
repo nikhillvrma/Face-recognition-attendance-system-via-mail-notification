@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Attendance System - Home Screen Mockup</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+  body { background: #e0e0e0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+
+  .window {
+    width: 1280px;
+    height: 720px;
+    background: #f0f2f5;
+    border: 2px solid #aaa;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Title bar */
+  .titlebar {
+    background: #2d2d2d;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    justify-content: space-between;
+  }
+  .titlebar span { color: #ccc; font-size: 12px; }
+  .titlebar-buttons { display: flex; gap: 6px; }
+  .btn-circle { width: 12px; height: 12px; border-radius: 50%; }
+  .btn-close { background: #ff5f56; }
+  .btn-min { background: #ffbd2e; }
+  .btn-max { background: #27c93f; }
+
+  /* Header */
+  .header {
+    background: #4a6fa5;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-shrink: 0;
+  }
+  .header-title { color: white; font-size: 26px; font-weight: bold; }
+  .header-datetime { color: white; font-size: 14px; font-weight: 500; }
+
+  /* Menu bar */
+  .menubar {
+    background: #ffffff;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    border-bottom: 1px solid #ccc;
+    flex-shrink: 0;
+  }
+  .menubar span {
+    font-size: 12px;
+    padding: 2px 10px;
+    cursor: pointer;
+    color: #333;
+    border-radius: 3px;
+  }
+  .menubar span:hover { background: #4fc3f7; color: white; }
+
+  /* Content */
+  .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 10px 20px;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* Panels */
+  .panel {
+    background: #ffffff;
+    border: 2px groove #ccc;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .panel-header {
+    background: #166088;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 15px;
+    text-align: center;
+  }
+
+  /* Left Panel */
+  .left-content { padding: 8px 15px; display: flex; flex-direction: column; flex: 1; }
+  .attendance-label { text-align: center; font-size: 17px; font-weight: bold; color: #333; margin: 6px 0; }
+
+  .btn { border: none; border-radius: 4px; color: white; font-weight: bold; cursor: pointer; font-size: 13px; padding: 8px 0; margin: 4px auto; display: block; width: 220px; }
+  .btn-blue { background: #4a6fa5; }
+  .btn-orange { background: #ffa726; }
+  .btn-red { background: #ef5350; }
+  .btn-green { background: #66bb6a; }
+
+  /* Treeview table */
+  .table-wrap { flex: 1; margin-top: 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { background: #166088; color: white; padding: 5px 4px; text-align: center; font-size: 12px; }
+  td { padding: 4px; text-align: center; border-bottom: 1px solid #eee; font-size: 11px; }
+  tr.present { background: #d4edda; }
+  tr.absent { background: #f8d7da; }
+  tr:hover { opacity: 0.85; }
+
+  /* Scrollbar mock */
+  .scroll-mock { width: 10px; background: #ddd; float: right; height: 200px; border-radius: 4px; }
+
+  /* Right Panel */
+  .right-content { padding: 8px 20px; display: flex; flex-direction: column; flex: 1; overflow: hidden; }
+  .form-label { font-size: 13px; color: #333; margin: 6px 0 2px; }
+  .form-input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+    color: #333;
+    background: #fafafa;
+    outline: none;
+    margin-bottom: 2px;
+  }
+  .form-input:focus { border-color: #4fc3f7; }
+  .instructions {
+    background: #f0f8ff;
+    border: 1px solid #166088;
+    color: #166088;
+    text-align: center;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 8px;
+    border-radius: 4px;
+    margin: 8px 0;
+  }
+  .btn-row { display: flex; gap: 10px; margin: 6px 0; }
+  .btn-row .btn { width: auto; flex: 1; margin: 0; }
+  .registration-badge {
+    background: #166088;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-top: auto;
+    border: 1px solid #0e4a6e;
+  }
+  .clear-btn {
+    background: #ffa726;
+    border: none;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 3px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-bottom: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="window">
+  <!-- Title bar -->
+  <div class="titlebar">
+    <span>Attendance System</span>
+    <div class="titlebar-buttons">
+      <div class="btn-circle btn-min"></div>
+      <div class="btn-circle btn-max"></div>
+      <div class="btn-circle btn-close"></div>
+    </div>
+  </div>
+
+  <!-- Menu bar -->
+  <div class="menubar">
+    <span>Help</span>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-title">Face Recognition Based Attendance System</div>
+    <div class="header-datetime">27-February-2026 &nbsp;|&nbsp; 10:45:32</div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Left Panel -->
+    <div class="panel">
+      <div class="panel-header">For Already Registered</div>
+      <div class="left-content">
+        <div class="attendance-label">Attendance</div>
+        <button class="btn btn-blue">Take Attendance</button>
+        <button class="btn btn-orange">Mark Absent Students</button>
+
+        <!-- Treeview Table -->
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>STATUS</th>
+                <th>TIME</th>
+                <th>DATE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="present">
+                <td>101</td><td>Aisha Sharma</td><td>Present</td><td>09:02:15</td><td>27-02-2026</td>
+              </tr>
+              <tr class="absent">
+                <td>102</td><td>Rahul Verma</td><td>Absent</td><td>N/A</td><td>27-02-2026</td>
+              </tr>
+              <tr class="present">
+                <td>103</td><td>Priya Nair</td><td>Present</td><td>09:05:42</td><td>27-02-2026</td>
+              </tr>
+              <tr class="absent">
+                <td>104</td><td>Karan Mehta</td><td>Absent</td><td>N/A</td><td>27-02-2026</td>
+              </tr>
+              <tr class="present">
+                <td>105</td><td>Sneha Patel</td><td>Present</td><td>09:10:07</td><td>27-02-2026</td>
+              </tr>
+              <tr class="present">
+                <td>106</td><td>Arjun Das</td><td>Present</td><td>09:12:33</td><td>27-02-2026</td>
+              </tr>
+              <tr class="absent">
+                <td>107</td><td>Divya Rao</td><td>Absent</td><td>N/A</td><td>27-02-2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <button class="btn btn-red" style="margin-top:10px;">Quit</button>
+      </div>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="panel">
+      <div class="panel-header">For New Registrations</div>
+      <div class="right-content">
+
+        <div class="form-label">Enter ID</div>
+        <input class="form-input" type="text" placeholder="e.g. 108" />
+        <button class="clear-btn">Clear</button>
+
+        <div class="form-label">Enter Name</div>
+        <input class="form-input" type="text" placeholder="e.g. Rohit Kumar" />
+        <button class="clear-btn">Clear</button>
+
+        <div class="form-label">Parent Email</div>
+        <input class="form-input" type="email" placeholder="e.g. parent@example.com" />
+        <button class="clear-btn">Clear</button>
+
+        <div class="instructions">1) Take Images &nbsp;&nbsp;›&nbsp;&nbsp; 2) Save Profile</div>
+
+        <div class="btn-row">
+          <button class="btn btn-blue">Take Images</button>
+          <button class="btn btn-green">Save Profile</button>
+        </div>
+
+        <div class="registration-badge">TOTAL REGISTRATIONS: 7</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
